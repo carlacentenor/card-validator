@@ -3,20 +3,19 @@ const numCard = document.getElementById('cn');
 const typeCard = document.querySelector('#type-card');
 const visaImg = 'assets/images/visa.png';
 const mastercardImg = 'assets/images/mastercard.png';
+const number = /^([0-9])*$/;
+// variables de validación 
 let validateNumCard = false;
 
-/**Función que valida el número de tarjeta */
+/** Función que valida el número de tarjeta */
 numCard.addEventListener('keyup', () => {
-
   let num = numCard.value;
-  if (!num || !/^([0-9])*$/.test(num)) {
-console.log('Ingresa sólo números');
-  }
+  if (num && number.test(num) && num.length === 16) {
     let sum = 0;
     let arrayCard = num.split('');
     let arrayReverse = arrayCard.reverse();
 
-    for (let i = 0; i < arrayReverse.length; i++) {
+    arrayReverse.forEach((element, i) => {
       if (i % 2 !== 0) {
         let elementSelection = parseInt(arrayReverse[i]) * 2;
         if (elementSelection >= 10) {
@@ -29,13 +28,16 @@ console.log('Ingresa sólo números');
           arrayReverse[i] = otherElement;
         }
       }
-    }
+    });
 
-    for (let j = 0; j < arrayReverse.length; j++) {
-      sum += parseInt(arrayReverse[j]); // sumar todos los elementos del array
-    }
-    if (sum % 10 === 0) {
+    arrayReverse.forEach((element, index) => {
+      sum += parseInt(arrayReverse[index]);
+    });
+
+    if (sum > 0 && sum % 10 === 0) {
       validateNumCard = true;
+      numCard.classList.add('success');
+      numCard.classList.remove('error');
       if (num.match(/^4\d{3}-?\d{4}-?\d{4}-?\d{4}$/)) {
         typeCard.setAttribute('src', visaImg);
       }
@@ -44,15 +46,21 @@ console.log('Ingresa sólo números');
       }
     } else {
       validateNumCard = false;
+      numCard.classList.add('error');
+      numCard.classList.remove('success');
       typeCard.setAttribute('src', '');
     }
-  
-})
-
+  } else {
+    validateNumCard = false;
+    numCard.classList.add('error');
+    numCard.classList.remove('success');
+    typeCard.setAttribute('src', '');
+  }
+});
 
 
 // Función que valida y envía todos los campos
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', (event) => {
   if (validateNumCard) {
     alert('valido');
   }
