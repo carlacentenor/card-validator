@@ -72,34 +72,34 @@ $(document).ready(() => {
     return PATERNNAME.test($inputName.val());
   }
 
-  function areAllValidationsPassing() {  
+  const areAllValidationsPassing = () => {  
     return isNameValid();
   }
 
-  function formStateEvent() {
+  const formStateEvent = () => {
     $buttonPay.prop('disabled', !areAllValidationsPassing());
   }
-   
 
-  $inputCardNumber
+  $inputCardNumber.focus();
+
+    $inputCardNumber
     .focus()
-    .on('keyup', validateNumberCard)
+    .on('keyup', validateNumberCard )
     .on('keyup', formStateEvent);
-
 
   $inputName
     .focus()
     .on('keyup', isNameValid)
     .on('keyup', formStateEvent);
 
-  /* $inputExpiryDate
+  $inputExpiryDate
     .focus()
     .on('keyup', )
     .on('keyup', );
 
   $inputSecurityCode
     .on('keyup', )
-    .on('keyup', );*/
+    .on('keyup', );
 
   formStateEvent();
 });
