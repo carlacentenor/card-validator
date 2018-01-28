@@ -5,17 +5,17 @@ $(document).ready(() => {
   $inputSecurityCode = $('#cvv');
   $buttonPay = $('#button-pay');
 
-  function isNameValid() {
+  const isNameValid = ()  => {
     /* Usaremos una expresion regular para validar que escriba bien su nombre */
     var PATERNNAME = /^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/ ;
     return PATERNNAME.test($inputName.val());
   }
 
-  function areAllValidationsPassing() {  
+  const areAllValidationsPassing = () => {  
     return isNameValid();
   }
 
-  function formStateEvent() {
+  const formStateEvent = () => {
     $buttonPay.prop('disabled', !areAllValidationsPassing());
   }
 
