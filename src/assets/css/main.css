@@ -1,0 +1,40 @@
+/* Gobal */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #a9a9a9;
+}
+      
+/* Styles for title container */
+
+header {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+[alt="card"] {
+  max-width: 100%;
+}
+
+/* Styles for registry container */
+
+.center {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.group {
+  display: flex;
+  justify-content: center
+}
+
+.container-button {
+  margin-top: 2rem;
+}
+
+[alt="omise"] {
+  width: 4rem;
+}

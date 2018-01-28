@@ -1,0 +1,9 @@
+# Dependency directories
+node_modules/
+
+# Style guide
+.eslintrc
+
+# Binder vendors
+/src/assets/vendors
+
