@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Caeser Cipher</title>
+  <!-- Import Google Font -->
+  <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+  <!-- Import Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!--Import Bootstrap.css-->
+  <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+  <!-- Card Container -->
+  <header>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 col-lg-12 center">
+          <div class="col-xs-12 col-lg-4">
+            <img class="img-responsive" src="assets/images/card.png" alt="card">
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <!-- Registry Container -->
+    <div class="container-fluid center">
+      <div class="row">
+        <div class="col-xs-12 col-lg-12 container">
+          <form action="">
+            <div class="form-group">
+              <div class="col-12">
+                <label for="cn" class="col-form-label">Card number</label>
+                <input type="number" name="cn" class="form-control" id="cn" placeholder="Ex. 4242424242424242">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-12">
+                <label for="name" class="col-form-label">Name on card</label>
+                <input type="text" name="name" class="form-control" id="name" placeholder="Ex. John Appleseed">
+              </div>
+            </div>
+            <div class="form-group group">
+              <div class="col-6">
+                <label for="exp" class="col-form-label">Expiry Date</label>
+                <input type="date" name="exp" class="form-control" id="exp">
+              </div>
+              <div class="col-6">
+                <label for="cvv" class="col-form-label">CVV</label>
+                <input type="password" name="cvv" class="form-control" id="cvv" placeholder="Ex. 123">
+              </div>
+            </div>
+            <div class="col-12 container-button">
+              <input id="button-pay" type="submit" class="btn btn-info btn-lg btn-block" value="Pay" />
+            </div>
+          </form>
+          <div class="center">
+            <p>
+              Secured by <img src="assets/images/omise.png" alt="omise">
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- Import jQuery and Bootstrap.js -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="assets/js/app.js"></script>
+</body>
+
+</html>

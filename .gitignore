@@ -1,0 +1,10 @@
+# Dependency directories
+node_modules/
+*package-lock.json
+
+# Style guide
+.eslintrc
+
+# Binder vendors
+/src/assets/vendors
+

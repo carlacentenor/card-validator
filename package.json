@@ -1,0 +1,18 @@
+{
+  "name": "card-validator",
+  "version": "1.0.0",
+  "description": "Implementar un validador de datos de tarjeta de crédito.",
+  "main": "main.js",
+  "scripts": {
+    "build": "babel src -d lib"
+  },
+  "keywords": [
+    "babel"
+  ],
+  "author": "Betsy Vidal",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
+}
