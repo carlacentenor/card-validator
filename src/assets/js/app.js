@@ -66,7 +66,7 @@ $(document).ready(() => {
   };
 
 
-  function isNameValid() {
+  const isNameValid = ()  =>{
     /* Usaremos una expresion regular para validar que escriba bien su nombre */
     var PATERNNAME = /^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/ ;
     return PATERNNAME.test($inputName.val());
@@ -77,8 +77,11 @@ $(document).ready(() => {
   }
 
   const formStateEvent = () => {
-    $buttonPay.prop('disabled', !areAllValidationsPassing());
+    $buttonPay.prop('disabled', false);
   }
+
+ 
+
 
   $inputCardNumber.focus();
 
@@ -101,5 +104,11 @@ $(document).ready(() => {
     .on('keyup', )
     .on('keyup', );
 
-  formStateEvent();
+    const activeButton= ()=> {
+      if (validateNumCard && isNameValid()) {
+        formStateEvent();
+      }
+    }
+
+  
 });
