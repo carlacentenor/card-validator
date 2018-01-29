@@ -20,6 +20,10 @@ El plugin debe recibir una referencia a un elemento del DOM que contenga
    ```bash
    git clone https://github.com/<>/card-validator.git   
    ```
+2. Para poder hacer uso de la libreria tiene que trabajar con JQUERY.
+```html
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+```
 
 ***
 
