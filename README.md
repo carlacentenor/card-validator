@@ -16,11 +16,12 @@ El plugin debe recibir una referencia a un elemento del DOM que contenga
 
 ## Flujo de trabajo
 
-1. Primero deberás **clonar** nuestro repositoio de prueba. 
+1. Primero deberás **clonar** nuestro repositorio de prueba. 
    ```bash
    git clone https://github.com/<>/card-validator.git   
    ```
-
+2. Si te gusta nuestro trabajo, empieza usando nuestras formulas. A continuación
+te explicamos la foma de uso.
 ***
 
 ## Instalación
