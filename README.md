@@ -14,43 +14,32 @@ El plugin debe recibir una referencia a un elemento del DOM que contenga
 * `cvv` (Card Verification Value): Código de validación de 3 dígitos
 * `name`: Nombre completo como aparece en la tarjeta
 
-## Ejemplo
+## Flujo de trabajo
+
+1. Primero deberás **clonar** nuestro repositoio de prueba. 
+   ```bash
+   git clone https://github.com/<>/card-validator.git   
+   ```
+
+***
+
+## Instalación
+
+### Global 
 
 ```html
-<form>
-  <div class="form-group">
-    <label for="cn">Número de tarjeta</label>
-    <input id="cn" name="cn" />
-  </div>
-  <div class="form-group">
-    <label for="exp">Fecha de vencimiento</label>
-    <input id="exp" name="exp" />
-  </div>
-  <div class="form-group">
-    <label for="cvv">CVV</label>
-    <input id="cvv" name="cvv" />
-  </div>
-  <div class="form-group">
-    <label for="name">Nombre completo</label>
-    <input id="name" name="name" />
-  </div>
-  <input type="submit" value="Pagar" />
-</form>
+<script src="index.js"></script>
 ```
+
+## Forma de uso
 
 ```js
-const form = document.querySelector('form');
+// Si desea validar los input con los name anteriores, utilice las siguientes formulas
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  if (validateCardDetails(form)) {
-    console.log('datos válido... enviar...');
-  } else {
-    console.log('datos inválidos');
-  }
-});
+validateNumberCard(num, input, images);
+validateNames(name, input);
+validateDate(date, input, sentence);
+validateCode(cvv, input);
+
 ```
 
-A la hora de hacer las validaciones, la librería debería de añadir la clase
-`.error` a los `<input>`s que no pasen la validación, o la clase `.success`
-en caso de que sí pase.

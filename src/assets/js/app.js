@@ -5,110 +5,50 @@ $(document).ready(() => {
   $inputSecurityCode = $('#cvv');
   $buttonPay = $('#button-pay');
 
-  $form = $('.form');
-  $typeCard = $('#type-card');
-  const visaImg = 'assets/images/visa.png';
-  const mastercardImg = 'assets/images/mastercard.png';
-  const number = /^([0-9])*$/;
-  // variables de validación 
-  let validateNumCard = false;
-  
-  /** Función que valida el número de tarjeta */
-
-  let validateNumberCard = () => {
-    let num = $inputCardNumber.val();
-    if (num && number.test(num) && num.length === 16) {
-      let sum = 0;
-      let arrayCard = num.split('');
-      let arrayReverse = arrayCard.reverse();
-  
-      arrayReverse.forEach((element, i) => {
-        if (i % 2 !== 0) {
-          let elementSelection = parseInt(arrayReverse[i]) * 2;
-          if (elementSelection >= 10) {
-            let digitInitial = parseInt(elementSelection / 10);
-            let digitFinal = elementSelection % 10;
-            let elementFinal = digitInitial + digitFinal;
-            arrayReverse[i] = elementFinal;
-          } else {
-            let otherElement = parseInt(arrayReverse[i]) * 2;
-            arrayReverse[i] = otherElement;
-          }
-        }
-      });
-  
-      arrayReverse.forEach((element, index) => {
-        sum += parseInt(arrayReverse[index]);
-      });
-  
-      if (sum > 0 && sum % 10 === 0) {
-        validateNumCard = true;
-        $inputCardNumber.addClass('success');
-        $inputCardNumber.removeClass('error');
-        if (num.match(/^4\d{3}-?\d{4}-?\d{4}-?\d{4}$/)) {
-          $typeCard.attr('src', visaImg);
-        }
-        if (num.match(/^5[1-5]\d{2}-?\d{4}-?\d{4}-?\d{4}$/)) {
-          $typeCard.attr('src', mastercardImg);
-        }
-      } else {
-        validateNumCard = false;
-        $inputCardNumber.addClass('error');
-        $inputCardNumber.removeClass('success');
-        $typeCard.attr('src', '');
-      }
-    } else {
-      validateNumCard = false;
-      $inputCardNumber.addClass('error');
-      $inputCardNumber.removeClass('success');
-      $typeCard.attr('src', '');
-    }
-  };
-
-
-  const isNameValid = ()  =>{
-    /* Usaremos una expresion regular para validar que escriba bien su nombre */
-    var PATERNNAME = /^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/ ;
-    return PATERNNAME.test($inputName.val());
-  }
-
-  const areAllValidationsPassing = () => {  
-    return isNameValid();
-  }
-
-  const formStateEvent = () => {
-    $buttonPay.prop('disabled', false);
-  }
-
- 
-
-
-  $inputCardNumber.focus();
-
-    $inputCardNumber
+  $inputCardNumber
     .focus()
-    .on('keyup', validateNumberCard )
+    .on('keyup', function() {
+      $typeCard = $('#type-card');
+      let cn = $(this).val();
+
+      /* Llamamos a la funcion, para validar el número de tarjeta, 
+      agregar una clase de error y success al input y la imagen que
+      corresponda segun el numero que escriba */
+      validateNumberCard(cn, $(this), $typeCard);
+    })
     .on('keyup', formStateEvent);
 
   $inputName
-    .focus()
-    .on('keyup', isNameValid)
+    .on('keyup', function() {
+      let name = $inputName.val();
+      validateName(name, $(this));
+    })
     .on('keyup', formStateEvent);
 
   $inputExpiryDate
-    .focus()
-    .on('keyup', )
-    .on('keyup', );
+    // .on('keypress', onlyNumber(event))
+    .on('keyup', function() {
+      $message = $('#message');
+      let exp = $inputExpiryDate.val();
+
+      /* Llamamos a la funcion, para validar la fecha de expiración 
+      y agregar un mensaje de aprobación o error */
+      validateDate(exp, $(this), $message);
+    })
+    .on('keyup', formStateEvent);
 
   $inputSecurityCode
-    .on('keyup', )
-    .on('keyup', );
+    .on('keyup', function() {
+      let cvv = $inputSecurityCode.val();
+      validateCode(cvv, $(this));
+    })
+    .on('keyup', formStateEvent);
 
-    const activeButton= ()=> {
-      if (validateNumCard && isNameValid()) {
-        formStateEvent();
-      }
-    }
-
+  const areAllValidationsPassing = () => {  
+    return validateName(name, $(this)) && validateNumberCard(cn, $(this), $typeCard) && validateDate(exp, $(this), $message) && validateCode(cvv, $(this));
+  };
   
+  const formStateEvent = () => {
+    $buttonPay.prop('disabled', false);
+  };
 });
