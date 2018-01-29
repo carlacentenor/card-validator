@@ -4,6 +4,14 @@ $(document).ready(() => {
   $inputExpiryDate = $('#exp');
   $inputSecurityCode = $('#cvv');
   $buttonPay = $('#button-pay');
+  
+  const areAllValidationsPassing = () => {  
+    return validateName(name, $(this)) && validateNumberCard(cn, $(this), $typeCard) && validateDate(exp, $(this), $message) && validateCode(cvv, $(this));
+  };
+  
+  const formStateEvent = () => {
+    $buttonPay.prop('disabled', false);
+  };
 
   $inputCardNumber
     .focus()
@@ -43,12 +51,4 @@ $(document).ready(() => {
       validateCode(cvv, $(this));
     })
     .on('keyup', formStateEvent);
-
-  const areAllValidationsPassing = () => {  
-    return validateName(name, $(this)) && validateNumberCard(cn, $(this), $typeCard) && validateDate(exp, $(this), $message) && validateCode(cvv, $(this));
-  };
-  
-  const formStateEvent = () => {
-    $buttonPay.prop('disabled', false);
-  };
 });
