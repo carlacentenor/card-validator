@@ -59,7 +59,7 @@ const validateNumberCard = (num, input, images) => {
 /* Función para validar el nombre */
 const validateName = (name, input)  =>{
   /* Usaremos una expresion regular para validar que escriba bien su nombre */
-  var PATERNNAME = /^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/ ;
+  var PATERNNAME = /^([a-z ñáéíóú]{2,60})$/i;
 
   if (PATERNNAME.test(name)) {
     validate = true;
