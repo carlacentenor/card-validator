@@ -6,28 +6,29 @@ const mastercardImg = 'assets/images/mastercard.png';
 const number = /^([0-9])*$/;
 const validateVisa = /^4\d{3}-?\d{4}-?\d{4}-?\d{4}$/;
 const validateMastercard = /^5[1-5]\d{2}-?\d{4}-?\d{4}-?\d{4}$/;
-let validate = false;
 
-/** Función que válisa que solo ingresen números*/
+// declaración de variables de validación por cada campo requerido
+let validateCvv = false;
+let validateDateCard = false;
+let validateNameUser = false;
+let validateNumCard = false;
+
+/** Función que valida que sólo ingresen números en la tarjeta*/
 const onlyNumberCard = (num) => {
   if (number.test(num)) {
     return true;
-  } else {
-    return false;
-  }
+  } 
 };
 
-// Función que válida que solo ingresen 16 caracteres sin contar los espacios en blanco :adelante y al final.
+// Función que válida que solo ingresen 16 caracteres en la tarjeta
 const maxLengthCard = (num) => {
   if (num.length === 16) {
     return true;
-  } else {
-    return false;
-  }
+  } 
 };
 
 // Función que valida el tipo de tarjeta 
-const validateTypeVisa = (num, images) => {
+const validateTypeCard = (num, images) => {
   if (num.match(validateVisa)) {
     images.attr('src', visaImg);
   } else if (num.match(validateMastercard)) {
@@ -38,7 +39,8 @@ const validateTypeVisa = (num, images) => {
 };
 
 
-/* Función que valida el número de tarjeta */
+/* Función que valida el número de tarjeta según Algoritmo de Luhn*/
+
 const validateNumberCard = (num, input, images) => {
   if (maxLengthCard(num) && onlyNumberCard(num)) {
     let sum = 0;
@@ -62,19 +64,19 @@ const validateNumberCard = (num, input, images) => {
       sum += parseInt(arrayReverse[index]);
     });
 
-    if (sum % 10 === 0) {
-      validate = true;
+    if (sum > 0 && sum % 10 === 0) {
+      validateNumCard = true;
       input.addClass('success');
       input.removeClass('error');
-      validateTypeVisa(num, images);
+      validateTypeCard(num, images);
     } else {
-      validate = false;
+      validateNumCard = false;
       input.addClass('error');
       input.removeClass('success');
       images.attr('src', '');
     }
   } else {
-    validate = false;
+    validateNumCard = false;
     input.addClass('error');
     input.removeClass('success');
     images.attr('src', '');
@@ -87,11 +89,11 @@ const validateName = (name, input) => {
   var PATERNNAME = /^([a-z ñáéíóú]{2,60})$/i;
 
   if (PATERNNAME.test(name)) {
-    validate = true;
+    validateNameUser = true;
     input.addClass('success');
     input.removeClass('error');
   } else {
-    validate = false;
+    validateNameUser = false;
     input.addClass('error');
     input.removeClass('success');
   }
@@ -114,13 +116,13 @@ const onlyNumber = (evt) => {
   }
 };
 
-/* Función para verificar que la fecha escrita sea correcta según el formato YYYYMMDD */
+/* Función para verificar que la fecha escrita sea correcta según el formato MMYY */
 const validateDate = (date, input, sentence) => {
   let message = '';
 
   /* Si la fecha está completa comenzamos la validación */
   if (date.length === 4) {
-    validate = true;
+    validateDateCard = true;
     input.addClass('success');
     input.removeClass('error');
 
@@ -141,7 +143,7 @@ const validateDate = (date, input, sentence) => {
       input.removeClass('success');
     }
   } else {
-    validate = false;
+    validateDateCard = false;
     input.addClass('error');
     input.removeClass('success');
   }
@@ -152,11 +154,11 @@ const validateDate = (date, input, sentence) => {
 
 const validateCode = (cvv, input) => {
   if (number.test(cvv) && cvv.length === 3) {
-    validate = true;
+    validateCvv = true;
     input.addClass('success');
     input.removeClass('error');
   } else {
-    validate = false;
+    validateCvv = false;
     input.addClass('error');
     input.removeClass('success');
   }
