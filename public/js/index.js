@@ -4,11 +4,43 @@ const mastercardImg = 'assets/images/mastercard.png';
 
 /* Variables de validación */
 const number = /^([0-9])*$/;
+const validateVisa = /^4\d{3}-?\d{4}-?\d{4}-?\d{4}$/;
+const validateMastercard = /^5[1-5]\d{2}-?\d{4}-?\d{4}-?\d{4}$/;
 let validate = false;
+
+/** Función que válisa que solo ingresen números*/
+const onlyNumberCard = (num) => {
+  if (number.test(num)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+// Función que válida que solo ingresen 16 caracteres sin contar los espacios en blanco :adelante y al final.
+const maxLengthCard = (num) => {
+  if (num.length === 16) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+// Función que valida el tipo de tarjeta 
+const validateTypeVisa = (num, images) => {
+  if (num.match(validateVisa)) {
+    images.attr('src', visaImg);
+  } else if (num.match(validateMastercard)) {
+    images.attr('src', mastercardImg);
+  } else {
+    images.attr('src', '');
+  }
+};
+
 
 /* Función que valida el número de tarjeta */
 const validateNumberCard = (num, input, images) => {
-  if (num && number.test(num) && num.length === 16) {
+  if (maxLengthCard(num) && onlyNumberCard(num)) {
     let sum = 0;
     let arrayCard = num.split('');
     let arrayReverse = arrayCard.reverse();
@@ -17,9 +49,7 @@ const validateNumberCard = (num, input, images) => {
       if (i % 2 !== 0) {
         let elementSelection = parseInt(arrayReverse[i]) * 2;
         if (elementSelection >= 10) {
-          let digitInitial = parseInt(elementSelection / 10);
-          let digitFinal = elementSelection % 10;
-          let elementFinal = digitInitial + digitFinal;
+          let elementFinal = parseInt(elementSelection / 10) + elementSelection % 10;
           arrayReverse[i] = elementFinal;
         } else {
           let otherElement = parseInt(arrayReverse[i]) * 2;
@@ -32,16 +62,11 @@ const validateNumberCard = (num, input, images) => {
       sum += parseInt(arrayReverse[index]);
     });
 
-    if (sum > 0 && sum % 10 === 0) {
+    if (sum % 10 === 0) {
       validate = true;
       input.addClass('success');
       input.removeClass('error');
-      if (num.match(/^4\d{3}-?\d{4}-?\d{4}-?\d{4}$/)) {
-        images.attr('src', visaImg);
-      }
-      if (num.match(/^5[1-5]\d{2}-?\d{4}-?\d{4}-?\d{4}$/)) {
-        images.attr('src', mastercardImg);
-      }
+      validateTypeVisa(num, images);
     } else {
       validate = false;
       input.addClass('error');
@@ -57,7 +82,7 @@ const validateNumberCard = (num, input, images) => {
 };
 
 /* Función para validar el nombre */
-const validateName = (name, input)  =>{
+const validateName = (name, input) => {
   /* Usaremos una expresion regular para validar que escriba bien su nombre */
   var PATERNNAME = /^([a-z ñáéíóú]{2,60})$/i;
 
@@ -69,14 +94,13 @@ const validateName = (name, input)  =>{
     validate = false;
     input.addClass('error');
     input.removeClass('success');
-    images.attr('src', '');
   }
 };
 
 /* Función para permitir sólo números, retroceso y enter */
 const onlyNumber = (evt) => {
   /* Asignamos el valor de la tecla a keynum */
-  if (window.event) { 
+  if (window.event) {
     keynum = evt.keyCode; // IE
   } else {
     keynum = evt.which; // FF
@@ -95,22 +119,26 @@ const validateDate = (date, input, sentence) => {
   let message = '';
 
   /* Si la fecha está completa comenzamos la validación */
-  if (date.length == 4) {
+  if (date.length === 4) {
     validate = true;
     input.addClass('success');
     input.removeClass('error');
 
     /* Extraemos el mes */
-    let month = parseInt(date.substr(0, 2)); 
+    let month = parseInt(date.substr(0, 2));
 
     /* Extraemos en año */
-    let year = parseInt(date.substr(2, 2)); 
+    let year = parseInt(date.substr(2, 2));
 
     /* Si las partes de la fecha concuerdan con las que digitamos, es correcta */
     if ((year <= 99) && (month > 0 && month <= 12)) {
       message = 'Fecha correcta';
+      input.addClass('success');
+      input.removeClass('error');
     } else {
       message = 'Fecha incorrecta';
+      input.addClass('error');
+      input.removeClass('success');
     }
   } else {
     validate = false;
