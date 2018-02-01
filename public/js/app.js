@@ -4,14 +4,27 @@ $(document).ready(() => {
   $inputExpiryDate = $('#exp');
   $inputSecurityCode = $('#cvv');
   $buttonPay = $('#button-pay');
-  
-  const areAllValidationsPassing = () => {  
-    return validateName(name, $(this)) && validateNumberCard(cn, $(this), $typeCard) && validateDate(exp, $(this), $message) && validateCode(cvv, $(this));
+
+  /** Función que valida todos los campos y activa el boton */
+  const areAllValidationsPassing = () => {
+    if (validateNumCard && validateNameUser && validateDateCard && validateCvv) {
+      formStateEvent();
+    } else {
+      inactiveButtonPay();
+    }
   };
-  
+
+  /** Funciones de activación y desactivación de boton */
   const formStateEvent = () => {
     $buttonPay.prop('disabled', false);
   };
+
+  const inactiveButtonPay = () => {
+    $buttonPay.prop('disabled', 'disabled');
+  };
+
+
+  /** Eventos*/
 
   $inputCardNumber
     .focus()
@@ -24,14 +37,14 @@ $(document).ready(() => {
       corresponda segun el numero que escriba */
       validateNumberCard(cn, $(this), $typeCard);
     })
-    .on('keyup', formStateEvent);
+    .on('keyup', areAllValidationsPassing);
 
   $inputName
     .on('keyup', function() {
       let name = $inputName.val();
       validateName(name, $(this));
     })
-    .on('keyup', formStateEvent);
+    .on('keyup', areAllValidationsPassing);
 
   $inputExpiryDate
     // .on('keypress', onlyNumber(event))
@@ -43,12 +56,12 @@ $(document).ready(() => {
       y agregar un mensaje de aprobación o error */
       validateDate(exp, $(this), $message);
     })
-    .on('keyup', formStateEvent);
+    .on('keyup', areAllValidationsPassing);
 
   $inputSecurityCode
     .on('keyup', function() {
       let cvv = $inputSecurityCode.val();
       validateCode(cvv, $(this));
     })
-    .on('keyup', formStateEvent);
+    .on('keyup', areAllValidationsPassing);
 });
