@@ -3,6 +3,7 @@
 **Validador de datos de tarjetas de crédito** es una librería que permite `validar una tarjeta de crédito`
 (usando algoritmo de Luhn), `fecha de vencimiento`, `código de verificación (cvv)` y `nombre completo` que aparece en la tarjeta.
 
+***
 ## Plan de trabajo
 
 #### 1. Decisión del reto a desarrollar.
@@ -137,7 +138,9 @@ node_modules/
 
 </html>
  ```
+ ***
 ![](public/assets/images/maquetacion.PNG)
+ ***
 
 * Creación de los issues.
 * Implementación de la funcionalidad esencial.
@@ -288,7 +291,7 @@ node_modules/
         }
         };
       ```
-  * Validación del nombre completo` que aparece en la tarjeta.
+  * Validación del nombre completo que aparece en la tarjeta.
     * Objetivos:
       * Definir una función que permita validar el nombre.
         ```js
@@ -332,10 +335,10 @@ node_modules/
             };
 
          ```
-
+***
 ## Instalación...!!!
 
-1. Primero deberás **clonar** nuestro repositoio de prueba. 
+1. Primero deberás **clonar** nuestro repositorio de prueba. 
    ```bash
       https://github.com/betsyvies/card-validator   
    ```
@@ -348,16 +351,18 @@ node_modules/
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/app.js"></script> 
     ```
-***
+
 4. Cambia la referencia de los `<input>`s con los siguientes `id`s.
 * `cn` (Card Number): El número de la tarjeta de crédito.
 * `exp` (Expiry Date): Fecha de expiración.
 * `cvv` (Card Verification Value): Código de validación de 3 dígitos.
 * `name`: Nombre completo como aparece en la tarjeta.
-
+***
 ## Funcionalidad
 
 ![GIF](public/assets/images/funcionalidad.gif)
+
+***
 
 ## Colaboradores
 
