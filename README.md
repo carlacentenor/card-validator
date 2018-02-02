@@ -149,165 +149,41 @@ node_modules/
     * Objetivos:
       * Definir una función que solo permita el ingreso de solo números.
       ```js
-       const onlyNumberCard = (num) => {
-       if (number.test(num)) {
-       return true;
-         } 
-       };
+       const onlyNumberCard = (num) => {...};
       ```
       * Definir una función que permita ingresar solo 16 caracteres.
        ```js
-       const maxLengthCard = (num) => {
-        if (num.length === 16) {
-            return true;
-          } 
-        };
-      ```
+       const maxLengthCard = (num) => {...} 
+       ```
       * Definir una función que permita ver el tipo de tarjeta de crédito (Visa, Mastercard).
       ```js
-       const validateTypeCard = (num, images) => {
-        if (num.match(validateVisa)) {
-            images.attr('src', visaImg);
-        } else if (num.match(validateMastercard)) {
-            images.attr('src', mastercardImg);
-        } else {
-            images.attr('src', '');
-        }
-        };
+       const validateTypeCard = (num, images) => {...};
       ```
       * Definir una función que permita validar el número de tarjeta de crédito según Luhn.
       ```js
-       const validateNumberCard = (num, input, images) => {
-        if (maxLengthCard(num) && onlyNumberCard(num)) {
-            let sum = 0;
-            let arrayCard = num.split('');
-            let arrayReverse = arrayCard.reverse();
-
-            arrayReverse.forEach((element, i) => {
-            if (i % 2 !== 0) {
-                let elementSelection = parseInt(arrayReverse[i]) * 2;
-                if (elementSelection >= 10) {
-                let elementFinal = parseInt(elementSelection / 10) + elementSelection % 10;
-                arrayReverse[i] = elementFinal;
-                } else {
-                let otherElement = parseInt(arrayReverse[i]) * 2;
-                arrayReverse[i] = otherElement;
-                }
-            }
-            });
-
-            arrayReverse.forEach((element, index) => {
-            sum += parseInt(arrayReverse[index]);
-            });
-
-            if (sum > 0 && sum % 10 === 0) {
-            validateNumCard = true;
-            input.addClass('success');
-            input.removeClass('error');
-            validateTypeCard(num, images);
-            } else {
-            validateNumCard = false;
-            input.addClass('error');
-            input.removeClass('success');
-            images.attr('src', '');
-            }
-        } else {
-            validateNumCard = false;
-            input.addClass('error');
-            input.removeClass('success');
-            images.attr('src', '');
-        }
-        };
-
+       const validateNumberCard = (num, input, images) => {...};
       ```
   * Validación de la fecha de vencimiento.
     * Objetivos:
       * Definir una función que permita solo números retroceso y enter.
       ```js
-       const onlyNumber = (evt) => {
-        /* Asignamos el valor de la tecla a keynum */
-        if (window.event) {
-            keynum = evt.keyCode; // IE
-        } else {
-            keynum = evt.which; // FF
-        }
-
-        /* comprobamos si se encuentra en el rango numérico */
-        if ((keynum > 47 && keynum < 58) || keynum === 8 || keynum === 13) {
-            return true;
-        } else {
-            return false;
-        }
-        };
+       const onlyNumber = (evt) => {...};
       ```
       * Definir una función que permita verificar que la fecha escrita sea corresta según el formato MMYY.
       ```js
-       const validateDate = (date, input, sentence) => {
-        let message = '';
-
-        /* Si la fecha está completa comenzamos la validación */
-        if (date.length === 4) {
-            validateDateCard = true;
-            input.addClass('success');
-            input.removeClass('error');
-
-            /* Extraemos el mes */
-            let month = parseInt(date.substr(0, 2));
-
-            /* Extraemos en año */
-            let year = parseInt(date.substr(2, 2));
-
-            /* Si las partes de la fecha concuerdan con las que digitamos, es correcta */
-            if ((year <= 99) && (month > 0 && month <= 12)) {
-            message = 'Fecha correcta';
-            input.addClass('success');
-            input.removeClass('error');
-            } else {
-            message = 'Fecha incorrecta';
-            input.addClass('error');
-            input.removeClass('success');
-            }
-        } else {
-            validateDateCard = false;
-            input.addClass('error');
-            input.removeClass('success');
-        }
-        sentence.html(message);
-        };
+       const validateDate = (date, input, sentence) => {...};
       ```
   *  Validación del código de verificación (cvv).
     * Objetivos:
       * Definir una función que acepte solo 3 dígitos para el código de seguridad.
       ```js
-       const validateCode = (cvv, input) => {
-        if (number.test(cvv) && cvv.length === 3) {
-            validateCvv = true;
-            input.addClass('success');
-            input.removeClass('error');
-        } else {
-            validateCvv = false;
-            input.addClass('error');
-            input.removeClass('success');
-        }
-        };
+       const validateCode = (cvv, input) => {...};
       ```
   * Validación del nombre completo que aparece en la tarjeta.
     * Objetivos:
       * Definir una función que permita validar el nombre.
         ```js
-             const validateName = (name, input) => {
-            /* Usaremos una expresion regular para validar que escriba bien su nombre */
-            var PATERNNAME = /^([a-z ñáéíóú]{2,60})$/i;
-            if (PATERNNAME.test(name)) {
-                validateNameUser = true;
-                input.addClass('success');
-                input.removeClass('error');
-            } else {
-                validateNameUser = false;
-                input.addClass('error');
-                input.removeClass('success');
-            }
-            };
+        const validateName = (name, input) => {...};
         ```
 
 * Implementación de la funcionalidad opcional.
@@ -315,24 +191,13 @@ node_modules/
     * Objetivos:
         * Definir una función que permita validar todos los campos (inputs) y active el button.
          ```js
-                const areAllValidationsPassing = () => {
-                if (validateNumCard && validateNameUser && validateDateCard && validateCvv) {
-                formStateEvent();
-                } else {
-                inactiveButtonPay();
-                }
-            };
-
-      ```
+                const areAllValidationsPassing = () => {}               
+         ```
         * Definir una función que permita activar y desactivar el button.
          ```js
-            const formStateEvent = () => {
-            $buttonPay.prop('disabled', false);
-            };
+            const formStateEvent = () => {...};
 
-            const inactiveButtonPay = () => {
-                $buttonPay.prop('disabled', 'disabled');
-            };
+            const inactiveButtonPay = () => {...};
 
          ```
 ***
