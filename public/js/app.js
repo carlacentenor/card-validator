@@ -27,7 +27,6 @@ $(document).ready(() => {
   /** Eventos*/
 
   $inputCardNumber
-    .focus()
     .on('keyup', function() {
       $typeCard = $('#type-card');
       let cn = $(this).val();
