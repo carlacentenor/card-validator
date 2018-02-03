@@ -47,14 +47,9 @@ $(document).ready(() => {
     .on('keyup', areAllValidationsPassing);
 
   $inputExpiryDate
-    // .on('keypress', onlyNumber(event))
     .on('keyup', function() {
-      $message = $('#message');
       let exp = $inputExpiryDate.val();
-
-      /* Llamamos a la funcion, para validar la fecha de expiración 
-      y agregar un mensaje de aprobación o error */
-      validateDate(exp, $(this), $message);
+      validateDate(exp, $(this));
     })
     .on('keyup', areAllValidationsPassing);
 

@@ -17,14 +17,14 @@ let validateNumCard = false;
 const onlyNumberCard = (num) => {
   if (number.test(num)) {
     return true;
-  } 
+  }
 };
 
 // Función que válida que solo ingresen 16 caracteres en la tarjeta
 const maxLengthCard = (num) => {
   if (num.length === 16) {
     return true;
-  } 
+  }
 };
 
 // Función que valida el tipo de tarjeta 
@@ -99,46 +99,27 @@ const validateName = (name, input) => {
   }
 };
 
-/* Función para permitir sólo números, retroceso y enter */
-const onlyNumber = (evt) => {
-  /* Asignamos el valor de la tecla a keynum */
-  if (window.event) {
-    keynum = evt.keyCode; // IE
-  } else {
-    keynum = evt.which; // FF
-  }
-
-  /* comprobamos si se encuentra en el rango numérico */
-  if ((keynum > 47 && keynum < 58) || keynum === 8 || keynum === 13) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-/* Función para verificar que la fecha escrita sea correcta según el formato MMYY */
-const validateDate = (date, input, sentence) => {
-  let message = '';
-
-  /* Si la fecha está completa comenzamos la validación */
-  if (date.length === 4) {
+/* Función para permitir sólo números*/
+const validateDate = (exp, input) => {
+  if (number.test(exp) && exp.length === 4) {
     validateDateCard = true;
-    input.addClass('success');
-    input.removeClass('error');
-
     /* Extraemos el mes */
-    let month = parseInt(date.substr(0, 2));
-
+    let month = parseInt(exp.substr(0, 2));
     /* Extraemos en año */
-    let year = parseInt(date.substr(2, 2));
-
+    let year = parseInt(exp.substr(2, 2));
+    /* Extraemos el valor de la fecha actual */
+    let months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+    let currentDate = new Date();
+    let currentMonths = months[currentDate.getUTCMonth()];
+    let currentYear = currentDate.getFullYear();
+    let stringYear = currentYear.toString();
+    let valueYear = stringYear.substr(2, 2);
+    let intYear = parseInt(valueYear);
     /* Si las partes de la fecha concuerdan con las que digitamos, es correcta */
-    if ((year <= 99) && (month > 0 && month <= 12)) {
-      message = 'Fecha correcta';
+    if ((year >= intYear) && (month >= currentMonths)) {
       input.addClass('success');
       input.removeClass('error');
     } else {
-      message = 'Fecha incorrecta';
       input.addClass('error');
       input.removeClass('success');
     }
@@ -147,7 +128,7 @@ const validateDate = (date, input, sentence) => {
     input.addClass('error');
     input.removeClass('success');
   }
-  sentence.html(message);
+
 };
 
 /* Función para validar que el codigo de seguridad solo tenga tres digitos */
