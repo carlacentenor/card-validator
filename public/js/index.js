@@ -116,7 +116,7 @@ const validateDate = (exp, input) => {
     let valueYear = stringYear.substr(2, 2);
     let intYear = parseInt(valueYear);
     /* Si las partes de la fecha concuerdan con las que digitamos, es correcta */
-    if ((year >= intYear) && (month >= currentMonths)) {
+    if ((year >= intYear) && (month > currentMonths)) {
       input.addClass('success');
       input.removeClass('error');
     } else {
@@ -128,7 +128,6 @@ const validateDate = (exp, input) => {
     input.addClass('error');
     input.removeClass('success');
   }
-
 };
 
 /* Función para validar que el codigo de seguridad solo tenga tres digitos */
